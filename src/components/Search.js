@@ -3,7 +3,7 @@ import Scroll from './Scroll';
 import SearchList from './SearchList';
 import { useQuery, gql } from '@apollo/client';
 
-function Search({ details }) {
+function Search() {
 
   const [searchField, setSearchField] = useState("");
   const [searchShow, setSearchShow] = useState(false); 
@@ -47,24 +47,6 @@ const { data, loading, error } = useQuery(CARDS_QUERY);
   if (loading) return "Loading...";
   if (error) return <pre>{error.message}</pre>
 
-  console.log(data);
-
-  const filteredPersons = details.filter(
-    person => {
-      return (
-        person
-        .name
-        .toLowerCase()
-        .includes(searchField.toLowerCase()) ||
-        person
-        .email
-        .toLowerCase()
-        .includes(searchField.toLowerCase())
-      );
-    }
-  );
-
-  //let data = data.contentCards.edges;
   const filteredCards = data.contentCards.edges.filter(
     data => {
       return (
@@ -90,7 +72,7 @@ const { data, loading, error } = useQuery(CARDS_QUERY);
     if (searchShow) {
       return (
         <Scroll>
-          <SearchList filteredPersons={filteredPersons} filteredCards={filteredCards} />
+          <SearchList filteredCards={filteredCards} />
         </Scroll>
       );
     }
@@ -98,12 +80,12 @@ const { data, loading, error } = useQuery(CARDS_QUERY);
 
   return (
     <section className="garamond">
-      <div className="navy georgia ma0 grow">
-        <h2 className="f2">Search content</h2>
+      <div className="white georgia ma0 grow">
+        <h2 className="f2">Search Tigerhall Content</h2>
       </div>
       <div className="pa2">
         <input 
-          className="pa3 bb br3 grow b--none bg-lightest-blue ma3"
+          className="pa3 bb br3 grow b--none bg-dark-gray ma3"
           type = "search" 
           placeholder = "Search Content" 
           onChange = {handleChange}

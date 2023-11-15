@@ -1,9 +1,7 @@
 import React from 'react';
 import Card from './Card';
 
-function SearchList({ filteredPersons, filteredCards }) {
-    console.log(filteredCards);
-  //const filtered = filteredPersons.map(person =>  <Card key={person.id} person={person} />);
+function SearchList({ filteredCards }) {
   const filtered = filteredCards.map(card =>  <Card key={card.name} card={card} />); 
   return (
     <div>
